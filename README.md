@@ -124,7 +124,7 @@ score = accuracy_score(y_test, y_pred)
 > [scikit-image](http://www.lfd.uci.edu/~gohlke/pythonlibs/#scikit-image)
 
 通过pip 安装scikit-learn和numpy
-> pip install scikit-learn
+> pip install scikit-learn  
 > pip install numpy
 
 
