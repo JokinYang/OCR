@@ -3,24 +3,17 @@
 单个字符识别准确率达99.2%
 
 
-文件说明:
-data文件为训练文件存放的地方，其下的图片按照标签分为不同的文件夹
-verifycode为测试时验证码保存的文件夹
-x_train.pickle为X_train的序列化文件
-y_train.pickle为y_train的序列化文件
-wust.ocr为class OCR()的序列化文件
+文件说明:  
+data文件为训练文件存放的地方，其下的图片按照标签分为不同的文件夹  
+verifycode为测试时验证码保存的文件夹  
+x_train.pickle为X_train的序列化文件  
+y_train.pickle为y_train的序列化文件  
+wust.ocr为class OCR()的序列化文件  
 
 
 ## 识别流程
 大致思路是去除图片的干扰→ 将图片二值化→ 将图片分割为单个字符→ 提取单个字符的特征→ 生成训练集→ 构建模型进行训练→ 训练完成进行预测
-```mermaid
-graph TD;
-  去除干扰和图片二值化-->图片分割;
-  图片分割-->获取图片特征;
-  获取图片特征-->生成训练数据;
-  生成训练数据-->训练模型;
-  训练模型-->进行预测;
-```
+
 ### 处理获取到的图片
 通过del_blur()函数去除图片的噪声并将图片二值化
 ```python
@@ -51,7 +44,7 @@ def split_img(img):
 ```
 
 ### 获取图片特征
-[HOG特征](https://www.jianshu.com/p/d3f93c360226)
+[HOG特征](https://www.jianshu.com/p/d3f93c360226)  
 [图片的其他特征](http://dataunion.org/20584.html)
 
 ```python
@@ -80,16 +73,17 @@ def hog(img):
 ### 生成训练数据
 
 ```python
-	X_train=[]
-    y_train=[]
-	for label in os.listdir(r'data'):
-		label_path = os.path.join(os.path.abspath('.'), 'data', label)
-		label_items = os.listdir(label_path)
-		for item_name in label_items:
-			item = os.path.join(label_path, item_name)
-			feature = hog(item)
-			X_train.append(feature)
-			y_train.append(label)
+
+X_train=[]
+y_train=[]
+for label in os.listdir(r'data'):
+	label_path = os.path.join(os.path.abspath('.'), 'data', label)
+	label_items = os.listdir(label_path)
+	for item_name in label_items:
+		item = os.path.join(label_path, item_name)
+		feature = hog(item)
+		X_train.append(feature)
+		y_train.append(label)
 
 ```
 X_train为图片的特征信息，y_train为图片的标签与X_train通过下标相对应
@@ -114,9 +108,9 @@ score = accuracy_score(y_test, y_pred)
 ```
 
 ## 参考数据
-这本书讲的通俗易懂很适合入门
-[Python机器学习-豆瓣](https://book.douban.com/subject/27000110/)
-[大佬的学习笔记](https://ljalphabeta.gitbooks.io/python-/content/)
+这本书讲的通俗易懂很适合入门  
+[Python机器学习-豆瓣](https://book.douban.com/subject/27000110/)  
+[大佬的学习笔记](https://ljalphabeta.gitbooks.io/python-/content/)  
 ![](https://img1.doubanio.com/lpic/s29407827.jpg)
 
 ## requirements
