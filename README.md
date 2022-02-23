@@ -45,7 +45,6 @@ def split_img(img):
 
 ### 获取图片特征
 [HOG特征](https://www.jianshu.com/p/d3f93c360226)  
-[图片的其他特征](http://dataunion.org/20584.html)
 
 ```python
 from skimage import feature as ft
